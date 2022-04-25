@@ -1,6 +1,6 @@
 
 
-var height = 6; //number of gusses 
+var height = 6 ; //number of gusses 
 var width = 5; //Lenght of the word
 
 var row = 0; //current guess(attmpt #
@@ -68,6 +68,7 @@ function intialize(){
 
 function update(){
     let correct = 0;
+    var letterCorrect = false;
     for(let c = 0; c < width; c++){
         let currTile = document.getElementById(row.toString() + "-" + c.toString());
         let letter = currTile.innerText;
@@ -76,9 +77,10 @@ function update(){
         if(word[c] == letter){
             currTile.classList.add("correct");
             correct += 1;
+            letterCorrect = true;
         }
         //is it in the word
-        else if(word.includes(letter)){
+        else if(word.includes(letter) && letterCorrect == false){
             currTile.classList.add("present");
         }
         //Not in the word
@@ -88,6 +90,8 @@ function update(){
 
         if(correct == width){
             gameOver = true;
+            document.getElementById("answer").innerHTML = "Yay you guessed the right word";
+            
         }
     }
 }
